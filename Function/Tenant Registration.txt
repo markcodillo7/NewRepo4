@@ -1,0 +1,464 @@
+Absolutely 👍 — your **Tenant Registration (updated UI)** is now clean, professional, and perfectly aligned with your **Room Management** design.
+Let’s go over a **detailed explanation of every function, field, and button** in your updated Tenant Registration form.
+
+This will help you fully understand how **each part works**, how it **connects to Room Management**, and what the **Admin can do** in this form.
+
+---
+
+# 🧾 **TENANT REGISTRATION – COMPLETE FUNCTION EXPLANATION (Updated UI)**
+
+### 🎯 **Purpose of the Form**
+
+The **Tenant Registration form** allows the admin to:
+
+* Add, update, or archive tenant records.
+* Assign tenants to rooms.
+* Track rent and deposit information.
+* Manage tenant accounts (username and password).
+* Search, sort, and view all registered tenants.
+
+---
+
+## 🧱 **A. PERSONAL INFORMATION SECTION (Top Section)**
+
+### 🧍 **1. Full Name**
+
+📘 **Purpose:**
+Input field for the tenant’s full name (e.g., “Mark Codillo”).
+
+💡 **Usage:**
+
+* Required when creating a new tenant record.
+* Used in search and reports.
+
+⚙️ **Example:**
+`Full Name: Mark Codillo`
+
+---
+
+### 🚻 **2. Gender**
+
+📘 **Purpose:**
+Dropdown list for selecting tenant’s gender (Male / Female / Other).
+
+💡 **Usage:**
+
+* Helps in sorting tenants.
+* Useful for assigning gender-specific rooms.
+
+⚙️ **Example:**
+`Gender: Male`
+
+---
+
+### 🎂 **3. Age**
+
+📘 **Purpose:**
+Displays or stores the tenant’s age.
+
+💡 **Usage:**
+
+* For demographic and reporting purposes.
+* Optional for sorting or data analytics.
+
+⚙️ **Example:**
+`Age: 21`
+
+---
+
+### 🏠 **4. Address**
+
+📘 **Purpose:**
+Records the tenant’s current or permanent home address.
+
+💡 **Usage:**
+
+* For emergency contact or billing purposes.
+
+⚙️ **Example:**
+`Address: Legazpi City, Albay`
+
+---
+
+### 📞 **5. Contact No.**
+
+📘 **Purpose:**
+Stores tenant’s mobile or phone number.
+
+💡 **Usage:**
+
+* Used for communication or maintenance requests.
+* Useful when generating reports or receipts.
+
+⚙️ **Example:**
+`Contact No.: 09123456789`
+
+---
+
+### 🏢 **6. Assigned Room**
+
+📘 **Purpose:**
+Dropdown list for selecting a room number from **Room Management**.
+
+💡 **Usage:**
+
+* Connects to the **Room Management module**.
+* When the admin selects a room, the system automatically fills in:
+
+  * Room Type
+  * Rent Price
+  * Required Deposit
+
+⚙️ **Example:**
+`Assigned Room: 101`
+
+✅ **Connection:**
+Pulled from the “Rooms” collection/table.
+
+---
+
+### 🏘️ **7. Room Type (Auto-Filled)**
+
+📘 **Purpose:**
+Displays the type of room (Single / Double / Shared).
+
+💡 **Usage:**
+
+* Automatically filled based on the selected **Assigned Room**.
+* Admin cannot edit this field manually.
+
+⚙️ **Example:**
+`Room Type: Single (auto-filled)`
+
+---
+
+### 🔄 **8. Status**
+
+📘 **Purpose:**
+Shows the tenant’s current state in the system.
+
+💡 **Options:**
+
+* **Active** → Tenant currently stays in the boarding house.
+* **Pending** → Tenant registered but not yet moved in.
+* **Moved Out** → Tenant has left or been archived.
+
+⚙️ **Example:**
+`Status: Active`
+
+✅ This field helps you quickly see who’s currently occupying rooms.
+
+---
+
+### 📅 **9. Move-in Date**
+
+📘 **Purpose:**
+Date picker for when the tenant officially moves in.
+
+💡 **Usage:**
+
+* Used to compute rent billing start.
+* Helps determine tenancy duration.
+
+⚙️ **Example:**
+`Move-in Date: 28 October 2025`
+
+---
+
+---
+
+## 💰 **B. RENT AND DEPOSIT DETAILS SECTION**
+
+This section handles the financial side of the tenant’s stay.
+It auto-fills rent and deposit based on the selected room (from Room Management).
+
+---
+
+### 💵 **10. Rent Price (Auto-Filled)**
+
+📘 **Purpose:**
+Displays the monthly rent amount for the assigned room.
+
+💡 **Usage:**
+
+* Auto-filled from Room Management.
+* Used for payment computation and reports.
+
+⚙️ **Example:**
+`Rent Price: ₱3,500.00 (auto-filled)`
+
+✅ The admin doesn’t edit this field — it comes directly from the assigned room data.
+
+---
+
+### 💰 **11. Required Deposit (Auto-Filled)**
+
+📘 **Purpose:**
+Shows the deposit amount required for the assigned room.
+
+💡 **Usage:**
+
+* Auto-filled from Room Management.
+* Usually equal to one month’s rent (but can vary by room type).
+
+⚙️ **Example:**
+`Required Deposit: ₱3,500.00 (auto-filled)`
+
+✅ **Connection:**
+This field pulls the “Monthly Deposit” value from Room Management.
+
+---
+
+### 💳 **12. Deposit Status**
+
+📘 **Purpose:**
+Tracks whether the tenant has paid the required deposit.
+
+💡 **Options:**
+
+* **Paid** → Tenant already paid the deposit.
+* **Unpaid** → Tenant still owes the deposit.
+
+⚙️ **Example:**
+`Deposit Status: Paid`
+
+✅ The admin can manually change this status when the tenant pays.
+
+---
+
+---
+
+## 👤 **C. TENANT ACCOUNT SECTION**
+
+This section handles login credentials for tenants (used in the tenant login system).
+
+---
+
+### 🔑 **13. Username**
+
+📘 **Purpose:**
+Sets a unique username for tenant login.
+
+💡 **Usage:**
+
+* Used during tenant login.
+* Must be unique for each tenant.
+
+⚙️ **Example:**
+`Username: mark101`
+
+---
+
+### 🔒 **14. Password**
+
+📘 **Purpose:**
+Sets tenant’s password for system login.
+
+💡 **Usage:**
+
+* Used during tenant login authentication.
+* Should be masked (hidden) for security.
+
+⚙️ **Example:**
+`Password: ●●●●●●●`
+
+✅ You can store passwords securely (hashed) if you connect this to MongoDB.
+
+---
+
+---
+
+## 🧭 **D. ACTION BUTTONS**
+
+### 🟩 **1. Add Tenant**
+
+📘 **Purpose:**
+Saves a new tenant record into the system.
+
+💡 **How It Works:**
+
+* Collects all entered data (Personal, Room, and Account info).
+* Creates a new record in the database.
+* Updates the Room’s “Current Occupants” count.
+
+⚙️ **Example:**
+Click “Add Tenant” after filling out all fields → new tenant appears in table.
+
+✅ Also updates Room Management:
+
+* `Current Occupants` +1
+* If room reaches full capacity → Status = “Occupied”
+
+---
+
+### 🟨 **2. Update Tenant**
+
+📘 **Purpose:**
+Allows the admin to modify tenant information.
+
+💡 **Usage:**
+
+* Click a row from the table below → data fills into fields.
+* Edit fields as needed → click “Update Tenant”.
+* Changes are saved in the database.
+
+⚙️ **Example:**
+Change Status from “Pending” to “Active”.
+
+---
+
+### 📦 **3. Archive Tenant**
+
+📘 **Purpose:**
+Moves a tenant record to the archive instead of deleting it.
+
+💡 **Usage:**
+
+* Keeps tenant history while removing from the active list.
+* Archived tenants won’t appear in active reports or tables.
+* Can be restored later if needed.
+
+⚙️ **Example:**
+Tenant moves out → click “Archive Tenant”.
+Room’s “Current Occupants” automatically decreases.
+
+---
+
+### 🧹 **4. Clear Fields**
+
+📘 **Purpose:**
+Resets all textboxes and dropdowns.
+
+💡 **Usage:**
+
+* Clears the form after adding or editing tenants.
+* Prevents accidental overwriting of old data.
+
+⚙️ **Example:**
+Click “Clear Fields” → form becomes empty again.
+
+---
+
+---
+
+## 🔍 **E. SEARCH AND SORT SECTION**
+
+### 🔎 **Search**
+
+📘 **Purpose:**
+Find a specific tenant quickly.
+
+💡 **Usage:**
+Type part of a name, room number, or status to filter results in real-time.
+
+⚙️ **Example:**
+Typing “101” shows all tenants in Room 101.
+
+---
+
+### 🔽 **Sort**
+
+📘 **Purpose:**
+Sort tenant records by a chosen category.
+
+💡 **Options:**
+
+* Sort by Name
+* Sort by Room Number
+* Sort by Status
+
+⚙️ **Example:**
+`Sort: Room` → tenants grouped by room number.
+
+---
+
+---
+
+## 📊 **F. TENANT DATA TABLE**
+
+Displays all registered tenants in an organized grid.
+
+| Column             | Description                    |
+| ------------------ | ------------------------------ |
+| **Tenant ID**      | System-generated unique ID     |
+| **Full Name**      | Tenant’s full name             |
+| **Gender**         | Male / Female                  |
+| **Age**            | Tenant’s age                   |
+| **Address**        | Home or permanent address      |
+| **Contact No.**    | Mobile number                  |
+| **Move-in Date**   | Date tenant started staying    |
+| **Assigned Room**  | Room number assigned           |
+| **Room Type**      | Single / Double / Shared       |
+| **Status**         | Active / Pending / Moved Out   |
+| **Deposit Amount** | Required deposit (auto-filled) |
+| **Deposit Status** | Paid / Unpaid                  |
+| **Username**       | Tenant account name            |
+
+✅ **Behavior:**
+
+* Automatically updates after adding, editing, or archiving tenants.
+* Can be sorted or filtered for easy management.
+
+---
+
+---
+
+## 🔗 **G. CONNECTION TO ROOM MANAGEMENT**
+
+| From Room Management | Used In Tenant Registration             | Function                     |
+| -------------------- | --------------------------------------- | ---------------------------- |
+| Room Type            | Auto-fills Room Type                    | Prevents manual input errors |
+| Rent Price           | Auto-fills Rent Price                   | Ensures accurate billing     |
+| Monthly Deposit      | Auto-fills Required Deposit             | Keeps pricing consistent     |
+| Status               | Filters Available Rooms only            | Prevents overbooking         |
+| Current Occupants    | Auto-updates when tenants added/removed | Keeps occupancy accurate     |
+
+✅ This makes both forms **interconnected**, forming one clean system.
+
+---
+
+# 🧭 **H. REAL SYSTEM FLOW**
+
+```
+1️⃣ Admin opens Tenant Registration
+2️⃣ Selects Assigned Room (e.g., Room 101)
+3️⃣ System auto-fills:
+     • Room Type
+     • Rent Price
+     • Required Deposit
+4️⃣ Admin fills personal info and account details
+5️⃣ Sets Deposit Status (Paid/Unpaid)
+6️⃣ Clicks Add Tenant
+7️⃣ System saves record + updates Room Occupants count
+8️⃣ If room is full → Room status auto-changes to “Occupied”
+```
+
+---
+
+# ✅ **SUMMARY OF FEATURES**
+
+| Category           | Function                            | Description                  |
+| ------------------ | ----------------------------------- | ---------------------------- |
+| 👤 Personal Info   | Name, Gender, Age, Address, Contact | Tenant identity              |
+| 🏠 Room Assignment | Assigned Room, Room Type            | Links tenant to a room       |
+| 💰 Financial Info  | Rent, Deposit, Deposit Status       | Manages room payment details |
+| 🔑 Account Info    | Username, Password                  | Tenant login credentials     |
+| ⚙️ Buttons         | Add, Update, Archive, Clear         | CRUD and record control      |
+| 🔎 Search & Sort   | Filter tenant data                  | Quick navigation             |
+| 🧩 DataGridView    | Shows all tenants                   | Overview of database records |
+
+---
+
+✅ **In Short:**
+Your **Tenant Registration (Updated UI)** is 100% correct in design and function.
+It’s clean, logically structured, connected to Room Management, and ready for system documentation or defense.
+
+---
+
+Would you like me to make a **visual system flow diagram (image)** showing how data moves between:
+
+* Room Management
+* Tenant Registration
+* (and optional Payment Tracking)?
+
+It’ll clearly show how everything works together for your documentation or presentation.

@@ -1,0 +1,358 @@
+Perfect 👏 — this version of your **Room Management UI** is clean, professional, and very well structured. You’ve clearly applied all best practices.
+
+Now, let’s go through a **complete explanation** of every element and function in your updated Room Management form — so you’ll know exactly what each part does, what data it affects, and how it connects to your Tenant Registration form.
+
+---
+
+# 🏠 **ROOM MANAGEMENT (Updated UI) – COMPLETE FUNCTION EXPLANATION**
+
+Your form is designed to let the **Admin** manage all the boarding rooms —
+create new rooms, update details, track status, monitor occupancy, and archive old records.
+
+---
+
+## 🧩 **A. FORM PURPOSE**
+
+The **Room Management form** allows the admin to:
+
+* Add new rooms
+* Set the rent and deposit per room
+* Track which rooms are available, occupied, or under maintenance
+* Automatically count how many tenants are in each room
+* Archive old rooms without deleting them
+
+This form directly supports the **Tenant Registration module** — since all room info here (rent, deposit, type, status) is used when registering tenants.
+
+---
+
+## 🧱 **B. INPUT FIELDS (Top Section)**
+
+Let’s break down each field:
+
+---
+
+### 🏷️ **1. Room Number**
+
+📘 **Purpose:**
+Unique identifier of each room (like “101”, “2A”, “3B”).
+
+💡 **How It Works:**
+
+* Admin enters a new room number here when creating a room.
+* Used by the Tenant Registration form to assign tenants.
+* Must be **unique** — two rooms cannot have the same number.
+
+⚙️ **Example:**
+If you enter “101”, the system saves it as “Room 101” in the database.
+
+---
+
+### 👥 **2. Capacity**
+
+📘 **Purpose:**
+The maximum number of tenants that can stay in this room.
+
+💡 **How It Works:**
+
+* Helps the system track when the room is full.
+* The system can compare **Capacity** vs **Current Occupants** to update the **Status** automatically.
+
+⚙️ **Example:**
+If Capacity = 2 and Current Occupants = 2 → system sets Status = “Occupied”.
+
+---
+
+### 🏠 **3. Room Type**
+
+📘 **Purpose:**
+Defines the type of room, which affects rent and deposit amounts.
+
+💡 **How It Works:**
+
+* The admin selects from a dropdown (Single / Double / Shared).
+* When you set this, you can define rent and deposit values according to the room type.
+* Tenant Registration uses this field to **auto-fill the deposit and rent**.
+
+⚙️ **Example:**
+Single Room → ₱3,000
+Double Room → ₱2,000
+Shared Room → ₱1,500
+
+---
+
+### 🪟 **4. Description**
+
+📘 **Purpose:**
+Stores short notes about the room for admin reference.
+
+💡 **How It Works:**
+Optional text field for extra info such as:
+
+* “With aircon and CR”
+* “Good for students”
+* “Needs repair”
+
+⚙️ **Example:**
+Description: “2 beds, with balcony”
+
+---
+
+### 💰 **5. Rent Price**
+
+📘 **Purpose:**
+The monthly rent amount for this room.
+
+💡 **How It Works:**
+
+* Set by the admin manually based on room type and size.
+* Displayed automatically in Tenant Registration when this room is chosen.
+* Used in payment computation (rent collection).
+
+⚙️ **Example:**
+Rent Price: ₱3,500 per month.
+
+---
+
+### 💵 **6. Monthly Deposit**
+
+📘 **Purpose:**
+The security deposit amount required for this room.
+
+💡 **How It Works:**
+
+* Defined once by the admin here.
+* Tenant Registration automatically loads this deposit when a tenant is assigned to this room.
+* Usually equal to or one month of rent.
+
+⚙️ **Example:**
+Monthly Deposit: ₱3,500.
+When a tenant selects Room 101, Tenant Registration shows “Required Deposit: ₱3,500”.
+
+---
+
+### 🔄 **7. Status**
+
+📘 **Purpose:**
+Shows the current availability of the room.
+
+💡 **How It Works:**
+
+* Dropdown with three options:
+
+  * **Available** – Room is empty and ready for tenants.
+  * **Occupied** – Full capacity reached (auto-updated when tenant added).
+  * **Maintenance** – Temporarily unavailable.
+
+⚙️ **Example:**
+When all occupants leave, admin sets Status = Available again.
+
+---
+
+### 👤 **8. Current Occupants**
+
+📘 **Purpose:**
+Displays how many tenants are currently staying in the room.
+
+💡 **How It Works:**
+
+* This field is **read-only**.
+* It updates automatically whenever a tenant is added or removed in Tenant Registration.
+
+⚙️ **Example:**
+Capacity = 2, Occupants = 1 → 1 slot left.
+Once 2 tenants are assigned → field shows 2, and Status auto-updates to “Occupied”.
+
+---
+
+---
+
+## 🧭 **C. ACTION BUTTONS (Middle Section)**
+
+### 🟩 **Add Room**
+
+📘 **Purpose:**
+Creates a new room record in the system.
+
+💡 **How It Works:**
+
+* Takes all the entered field values (Room Number, Type, Rent, Deposit, etc.).
+* Saves them to the database.
+* Refreshes the table below.
+
+⚙️ **Example:**
+Clicking “Add Room” after entering Room Number = 101, Rent = ₱3500, Deposit = ₱3500 →
+New record appears in the grid.
+
+---
+
+### 🟨 **Update Room**
+
+📘 **Purpose:**
+Allows the admin to edit details of an existing room.
+
+💡 **How It Works:**
+
+* Select a room record from the table.
+* Modify any field (e.g., rent, status, description).
+* Click “Update Room” to save changes.
+
+⚙️ **Example:**
+Change “Rent Price” from ₱3,500 → ₱4,000, click Update Room.
+
+---
+
+### 📦 **Archive Room**
+
+📘 **Purpose:**
+Safely removes the room from the active list (without deleting it permanently).
+
+💡 **How It Works:**
+
+* Marks the room as “Archived” in the database.
+* The record disappears from the active table but can be viewed later in an “Archived Rooms” list.
+* Useful when a room is permanently closed or repurposed.
+
+⚙️ **Example:**
+Room 202 is under renovation → click “Archive Room”.
+
+---
+
+### 🧹 **Clear Fields**
+
+📘 **Purpose:**
+Clears all textboxes and resets dropdowns.
+
+💡 **How It Works:**
+
+* Makes it easy to add a new room after editing one.
+* Does not affect any saved data.
+
+⚙️ **Example:**
+After updating a record, click “Clear Fields” to start fresh.
+
+---
+
+---
+
+## 🔎 **D. SEARCH, SORT, & FILTER (Middle Toolbar)**
+
+### 🔍 **Search**
+
+📘 **Purpose:**
+Find specific rooms quickly.
+
+💡 **How It Works:**
+
+* Admin can type a room number or keyword (e.g., “Single”).
+* Table below filters matching results instantly.
+
+---
+
+### 🔽 **Sort**
+
+📘 **Purpose:**
+Reorders the table based on selected criteria.
+
+💡 **Example Options:**
+
+* Sort by Rent Price (High → Low)
+* Sort by Capacity
+* Sort by Room Type
+
+---
+
+### 🔁 **Filter**
+
+📘 **Purpose:**
+Shows rooms that meet specific conditions.
+
+💡 **Example Options:**
+
+* Available Rooms Only
+* Occupied Rooms Only
+* Maintenance Rooms Only
+
+---
+
+---
+
+## 📋 **E. ROOM TABLE (Bottom Section)**
+
+Displays all existing room records in the system.
+
+| Column                | Function                                              |
+| --------------------- | ----------------------------------------------------- |
+| **Room ID**           | Unique identifier (system-generated).                 |
+| **Room Number**       | Displays the room name/number.                        |
+| **Capacity**          | Shows how many tenants the room can hold.             |
+| **Room Type**         | Indicates the type (Single, Double, Shared).          |
+| **Rent Price**        | Displays the rent per month.                          |
+| **Monthly Deposit**   | Displays required deposit amount.                     |
+| **Status**            | Shows current availability.                           |
+| **Current Occupants** | Displays the number of tenants assigned to this room. |
+
+✅ The table updates automatically when rooms are added, updated, or archived.
+
+---
+
+---
+
+## ⚙️ **F. SYSTEM CONNECTION (with Tenant Registration)**
+
+| Function                 | Connection                                                          |
+| ------------------------ | ------------------------------------------------------------------- |
+| **Rent Price & Deposit** | Automatically used in Tenant Registration when assigning rooms.     |
+| **Status**               | Updated based on tenant occupancy (e.g., when full → “Occupied”).   |
+| **Current Occupants**    | Auto-updated from the Tenant module.                                |
+| **Room Type**            | Determines rent and deposit autofill values in Tenant Registration. |
+
+---
+
+## 🧠 **G. Real Example Flow**
+
+1️⃣ **Admin adds Room 101**
+
+* Type: Single
+* Rent: ₱3,500
+* Deposit: ₱3,500
+* Capacity: 1
+* Status: Available
+
+2️⃣ **Tenant registers → Assigned Room: 101**
+
+* System auto-fills deposit ₱3,500.
+* Room’s “Current Occupants” becomes 1.
+* Room’s “Status” auto-changes to “Occupied”.
+
+3️⃣ **Tenant moves out → Admin archives tenant.**
+
+* Room’s “Current Occupants” returns to 0.
+* Status auto-resets to “Available”.
+
+✅ Everything stays connected — fully automated between modules.
+
+---
+
+# 🎯 **Final Summary (Room Management Functions Overview)**
+
+| Section                                   | Function                                          | Description                  |
+| ----------------------------------------- | ------------------------------------------------- | ---------------------------- |
+| **Room Info Fields**                      | Define room details, capacity, type, and pricing. | Stores key room data.        |
+| **Rent & Deposit**                        | Set base amounts used in Tenant Registration.     | Auto-applied to tenant rent. |
+| **Status & Occupants**                    | Track room availability and fullness.             | Auto-updated by system.      |
+| **Buttons (Add, Update, Archive, Clear)** | Manage room records safely and efficiently.       | Admin control panel.         |
+| **Search/Sort/Filter**                    | Find rooms quickly by number, rent, or status.    | Improves usability.          |
+| **Table (DataGridView)**                  | Displays all room info at a glance.               | Central record view.         |
+
+---
+
+✅ **In short:**
+
+> Your updated Room Management form is **functionally correct and professionally designed** —
+> every field, button, and column has a clear role, and it seamlessly connects with Tenant Registration.
+
+---
+
+Would you like me to create a **visual flowchart** showing how your **Room Management and Tenant Registration** forms interact —
+(e.g., Room → Tenant → Status Update → Occupants Auto-Count)?
+It would be perfect for documentation or system presentation.

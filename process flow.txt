@@ -1,0 +1,448 @@
+Below is a **very clear**, **very specific**, and **easy-to-understand** **COMPLETE PROCESS FLOW** for your entire UI/system — Admin Side + Tenant Side — based 100% on the layout you provided.
+
+This is written in **plain language**, perfect for **documentation**, **system analysis**, and **defense/presentation**.
+
+---
+
+# 🌐 **ROOMANTIC BOARDING HOUSE MANAGEMENT SYSTEM – COMPLETE PROCESS FLOW**
+
+---
+
+# 🧑‍💼 **A. ADMIN SIDE – FULL PROCESS FLOW**
+
+---
+
+# **1️⃣ ADMIN LOGIN → ADMIN DASHBOARD**
+
+### **Process:**
+
+1. Admin enters username + password.
+
+2. System validates credentials.
+
+3. If correct → redirect to **Admin Dashboard**.
+
+4. Dashboard loads:
+
+   * Total Tenants (from Tenant Collection)
+   * Occupied Rooms (from Room Collection)
+   * Pending Requests (from Request Collection)
+   * Overdue Payments (from Payment Collection)
+
+5. Recent Activities are displayed (from Activity Logs).
+
+### **Purpose:**
+
+Give the admin an overview of the system at a glance.
+
+---
+
+# **2️⃣ ROOM MODULE – PROCESS FLOW**
+
+### **A. Add Room**
+
+1. Admin enters room details.
+2. Clicks **Add Room**.
+3. System saves room into **Room Collection**.
+4. Status becomes **Vacant** by default.
+
+### **B. Update Room**
+
+1. Admin selects a room record.
+2. Edits info → clicks **Update Room**.
+3. System saves changes to the database.
+
+### **C. Archive Room**
+
+1. Admin clicks **Archive**.
+2. Room is marked **Inactive** (cannot be assigned to tenants).
+
+### **D. Search / Sort / Filter Rooms**
+
+* Search = Match room number/type/status
+* Sort = Based on price, capacity, room no.
+* Filter = Show only vacant/occupied/maintenance
+
+### **E. Table Actions**
+
+* **Edit** → Loads room details above
+* **Delete** (optional) → Removes room record
+
+---
+
+# **3️⃣ TENANT REGISTRATION – PROCESS FLOW**
+
+### **A. Enter Tenant Details**
+
+Admin fills: Name, Gender, Age, Address, Contact, Status.
+
+### **B. Rent Information**
+
+1. Admin chooses **Assigned Room**.
+2. System auto-fills:
+
+   * Rent Price
+   * Amount Deposit
+
+### **C. Create Account**
+
+Admin enters:
+
+* Username
+* Password
+
+### **D. Add Tenant**
+
+1. Admin clicks **Add Tenant**.
+2. System:
+
+   * Saves tenant in **Tenant Collection**
+   * Updates room status → **Occupied**
+   * Logs activity
+
+### **E. Update Tenant**
+
+Admin can modify profile info.
+
+### **F. Archive Tenant**
+
+* Changes status to **Moved Out**
+* Room becomes **Vacant** again
+
+### **G. Table Actions**
+
+* **Edit** → loads tenant details
+* **Delete/Archive** → removes tenant from active list
+
+---
+
+# **4️⃣ PAYMENT PROCESSING (ADMIN) – PROCESS FLOW**
+
+### **A. Search Tenant / Room**
+
+Admin searches a tenant or room number.
+System auto-fills:
+
+* Tenant ID
+* Name
+* Room
+* Rent/month
+* Outstanding balance
+
+### **B. Fill Payment Details**
+
+Admin selects:
+
+* Payment Type (Rent)
+* Period
+* Amount
+* Method (InstaPay)
+* Reference No.
+* Payment Date
+* Notes
+
+### **C. Save Payment**
+
+System:
+
+* Saves payment to **Payment Collection**
+* Updates outstanding balance
+* Logs activity
+
+### **D. Approve**
+
+Marks payment as **Paid**
+
+### **E. Reject**
+
+Payment marked **Rejected**
+
+### **F. Print Receipt**
+
+System generates printable receipt.
+
+---
+
+# **5️⃣ REQUEST HANDLING – PROCESS FLOW**
+
+### **A. Search Request**
+
+Admin searches by request ID, tenant name, or room.
+
+### **B. Auto Fill**
+
+When request is selected:
+
+* Request ID
+* Tenant
+* Room
+* Category
+* Date Filed
+* Complaint Details
+  → Auto-populated
+
+### **C. Update Status**
+
+Admin selects:
+
+* Pending
+* In Progress
+* Resolved
+* Closed
+
+Clicking **Update Status**:
+
+* Saves update to **Request Collection**
+
+### **D. Close Request**
+
+Sets status to **Closed**.
+
+### **E. Announcements**
+
+Admin creates announcement → displayed to all tenants.
+
+### **F. Lost & Found**
+
+Admin logs item report → can broadcast to all tenants.
+
+### **G. Request Table**
+
+Shows all requests:
+
+* Request ID
+* Tenant
+* Room
+* Category
+* Status
+* Date
+* Notes
+
+---
+
+# **6️⃣ REPORTS & MONITORING – PROCESS FLOW**
+
+### **A. Select Report Type**
+
+Admin chooses:
+
+* Monthly Income
+* Unpaid Tenants
+* Maintenance
+* Room Status
+
+### **B. Generate Report**
+
+System pulls data from:
+
+* Payment Collection
+* Room Collection
+* Tenant Collection
+* Request Collection
+
+### **C. Summary Boxes Display**
+
+Shows:
+
+* Total Income
+* Count of unpaid tenants
+* Room occupancy
+* Number of maintenance requests
+
+### **D. Generated Report Table**
+
+Shows full report data.
+
+### **E. Export / Print**
+
+Admin can:
+
+* Export to PDF
+* Print report
+* Refresh data
+
+---
+
+# **7️⃣ ADMIN MODULE (ACCOUNT MANAGEMENT)**
+
+### **A. Change Username**
+
+Admin enters:
+
+* Current username
+* New username
+
+Click **Update Username** → system updates account details.
+
+### **B. Change Password**
+
+Admin enters:
+
+* Current password
+* New password
+
+System validates + updates.
+
+### **C. Update Profile**
+
+Fields:
+
+* Full name
+* Email
+* Phone
+
+### **D. Login History**
+
+System displays admin login attempts.
+
+---
+
+# 👥 **B. TENANT SIDE – FULL PROCESS FLOW**
+
+---
+
+# **8️⃣ TENANT LOGIN → TENANT DASHBOARD**
+
+### After logging in, dashboard shows:
+
+* Room number
+* Rent price
+* Tenant status
+* Rent due date
+* Total paid
+* Announcements
+* Recent activities
+
+---
+
+# **9️⃣ TENANT PROFILE – PROCESS FLOW**
+
+### **A. Auto Fill**
+
+All fields are automatically loaded:
+
+* Full name
+* Gender
+* Age
+* Address
+* Contact
+* Status
+* Move-in
+* Assigned Room
+* Rent
+* Deposit
+
+### **B. Update Password**
+
+Tenant can change password.
+
+---
+
+# **🔟 MY PAYMENTS – PROCESS FLOW**
+
+### **A. Payment History**
+
+System displays all tenant payments.
+
+### **B. Make Payment Online**
+
+1. Payment type is fixed: Rent
+
+2. Tenant chooses payment period
+
+3. Amount auto-fills based on rent
+
+4. Tenant enters:
+
+   * Reference No.
+   * Notes
+
+5. Click **Pay Now**
+
+   * Payment sent to admin as **Pending**
+   * Tenant sees “Pending” status
+
+6. Admin approves → Status becomes **Paid**
+
+7. Tenant can **Download Receipt**
+
+---
+
+# **1️⃣1️⃣ TENANT REQUESTS / COMPLAINTS – PROCESS FLOW**
+
+### **A. Submit Request**
+
+Tenant selects:
+
+* Category
+* Description
+* Date
+* Urgency Level
+
+System saves request → Status = **Pending**
+
+### **B. View Submitted Requests**
+
+Shows:
+
+* ID
+* Category
+* Date
+* Status
+* Notes
+
+### **C. Request Statistics**
+
+System counts:
+
+* Total requests
+* Pending
+* Resolved
+
+---
+
+# 🎯 **C. COMPLETE SYSTEM FLOW (VERY SIMPLE VERSION)**
+
+```
+ADMIN LOGIN
+   ↓
+ADMIN DASHBOARD
+   ↓
+ROOM MODULE ↔ TENANT REGISTRATION ↔ PAYMENT PROCESSING
+   ↓                        ↓               ↓
+REQUEST HANDLING → ANNOUNCEMENTS → REPORTS & MONITORING
+   ↓                                     ↓
+ADMIN MODULE (Account Settings) ← Activity Logs
+```
+
+**Tenant Side:**
+
+```
+TENANT LOGIN
+   ↓
+TENANT DASHBOARD
+   ↓
+MY PROFILE ← ROOM DATA + TENANT DATA
+   ↓
+MY PAYMENTS ↔ ADMIN PAYMENT APPROVAL
+   ↓
+SUBMIT REQUEST ↔ ADMIN REQUEST HANDLING
+   ↓
+ANNOUNCEMENTS (From Admin)
+```
+
+---
+
+# ⭐ FINAL OUTPUT STATUS
+
+This is a **complete**, **specific**, and **easy-to-understand** **system process flow** for your entire UI.
+
+If you want, I can also deliver:
+
+📌 **DFD Level 0, 1, and 2**
+📌 **Use Case Diagram**
+📌 **System Architecture Diagram**
+📌 **Flowcharts (Each module)**
+📌 **Activity Diagram**
+
+Just tell me what you need next!

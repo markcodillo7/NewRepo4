@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Dashboard</title>
+    
+    <!-- Bootstrap CSS (required for spacing + grid + responsive) -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Your Admin CSS (load AFTER Bootstrap) -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="bi bi-house-door"></i> Tenant Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-target="dashboard">
+                        <a href="#dashboard">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-target="profile">
+                        <a href="#profile">
+                            <i class="bi bi-person"></i>
+                            <span>Tenant Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-target="payments">
+                        <a href="#payments">
+                            <i class="bi bi-credit-card"></i>
+                            <span>My Payments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-target="request">
+                        <a href="#request">
+                            <i class="bi bi-file-text"></i>
+                            <span>Request / Complaint</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <p class="user-name">Mark Codillo</p>
+                        <p class="user-role">Tenant</p>
+                    </div>
+                </div>
+                <button class="logout-btn">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h1 id="pageTitle">Tenant Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="header-user">
+                        <span>Mark Codillo</span>
+                        <div class="user-avatar-small">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="page-section active">
+                    <!-- Welcome Section -->
+                    <div class="welcome-section">
+                        <h2>Hello, Mark Codillo 👋</h2>
+                        <div class="tenant-info-card">
+                            <div class="tenant-details">
+                                <p><i class="bi bi-door-closed"></i> Room: 203</p>
+                                <p><i class="bi bi-currency-dollar"></i> Rent: ₱3,500</p>
+                                <p><i class="bi bi-check-circle"></i> Status: <span class="status-active">Active</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon rent-due">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Rent Due</h3>
+                                <p class="stat-value">₱3,500</p>
+                                <p class="stat-date">Due: 29 Nov 2025</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon payment-history">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Total Paid</h3>
+                                <p class="stat-value">₱10,500</p>
+                                <p class="stat-date">Current Period</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon maintenance">
+                                <i class="bi bi-tools"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Reports</h3>
+                                <p class="stat-value">1 Pending</p>
+                                <p class="stat-date">Lost Key</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Status Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-credit-card"></i> PAYMENT STATUS</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="payment-status-info">
+                                <div class="payment-detail">
+                                    <p><strong>Next Due:</strong> 29 November 2025</p>
+                                </div>
+                                <div class="payment-summary">
+                                    <div class="payment-item">
+                                        <span class="payment-label">Total Paid:</span>
+                                        <span class="payment-amount paid">₱10,500</span>
+                                    </div>
+                                    <div class="payment-item">
+                                        <span class="payment-label">Total Due:</span>
+                                        <span class="payment-amount due">₱3,500</span>
+                                    </div>
+                                </div>
+                                <button class="instapay-button">
+                                    <i class="bi bi-credit-card"></i> Pay via InstaPay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two Column Layout -->
+                    <div class="two-column-layout">
+                        <!-- Announcements -->
+                        <div class="dashboard-section">
+                            <div class="section-header">
+                                <h3><i class="bi bi-megaphone"></i> ANNOUNCEMENTS</h3>
+                            </div>
+                            <div class="section-content">
+                                <ul class="info-list">
+                                    <li>
+                                        <i class="bi bi-tools"></i>
+                                        <span>Maintenance Schedule: Nov 3 (8AM - 12PM)</span>
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-wifi"></i>
+                                        <span>New WiFi plan available (₱250/month)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Item Reports -->
+                        <div class="dashboard-section">
+                            <div class="section-header">
+                                <h3><i class="bi bi-box"></i> ITEM REPORTS</h3>
+                            </div>
+                            <div class="section-content">
+                                <ul class="info-list">
+                                    <li class="pending-item">
+                                        <i class="bi bi-key"></i>
+                                        <span>Lost Key – Pending</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rules & Policy -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-clipboard-check"></i> RULES & POLICY</h3>
+                        </div>
+                        <div class="section-content">
+                            <ul class="rules-list">
+                                <li><i class="bi bi-volume-mute"></i> No loud noise after 10PM</li>
+                                <li><i class="bi bi-person-clock"></i> Visitors until 9PM only</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Recent Activity</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon payment">
+                                    <i class="bi bi-credit-card"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p class="activity-title">Rent Payment Received</p>
+                                    <p class="activity-date">October 1, 2025</p>
+                                </div>
+                                <div class="activity-amount">₱3,500</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon report">
+                                    <i class="bi bi-key"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p class="activity-title">Lost Key Report Submitted</p>
+                                    <p class="activity-date">September 28, 2025</p>
+                                </div>
+                                <div class="activity-status pending">Pending</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon notification">
+                                    <i class="bi bi-bell"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p class="activity-title">Maintenance Notice</p>
+                                    <p class="activity-date">September 25, 2025</p>
+                                </div>
+                                <div class="activity-status info">Info</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date Display -->
+                    <div class="date-display">
+                        <p><i class="bi bi-clock"></i> Friday, 24 October 2025 – 7:30 AM</p>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="page-section">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <h2><i class="bi bi-person"></i> MY PROFILE</h2>
+                    </div>
+
+                    <!-- Personal Information Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3>Personal Information</h3>
+                        </div>
+                        <div class="section-content">
+                            <form class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName" value="Mark Codillo" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <div class="select-wrapper">
+                                            <select id="gender" class="form-input">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" id="age" value="28" class="form-input">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" value="123 Main Street, Quezon City, Metro Manila" class="form-input">
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="contact">Contact No.</label>
+                                        <input type="tel" id="contact" value="09123456789" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <div class="status-toggle">
+                                            <button type="button" class="status-btn active" data-status="active">Active</button>
+                                            <button type="button" class="status-btn" data-status="moved">Moved Out</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="moveInDate">Move-in Date</label>
+                                        <div class="date-input-wrapper">
+                                            <input type="date" id="moveInDate" value="2025-01-15" class="form-input">
+                                            <i class="bi bi-calendar"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assignedRoom">Assigned Room</label>
+                                        <input type="text" id="assignedRoom" value="203" class="form-input" readonly>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Account Information Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-person-circle"></i> ACCOUNT INFORMATION</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="account-info">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" value="mark.codillo" class="form-input" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="password-input-wrapper">
+                                            <input type="password" id="password" value="password123" class="form-input" readonly>
+                                            <i class="bi bi-eye-slash toggle-password"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="update-password-btn">
+                                    <i class="bi bi-lock"></i> Update Password
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rent Details Section -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-currency-dollar"></i> RENT DETAILS</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="rent-details">
+                                <div class="rent-item">
+                                    <span class="rent-label">Rent Price:</span>
+                                    <span class="rent-value">₱3,500</span>
+                                </div>
+                                <div class="rent-item">
+                                    <span class="rent-label">Deposit:</span>
+                                    <span class="rent-value">₱2,500</span>
+                                </div>
+                                <div class="rent-item">
+                                    <span class="rent-label">Payment Frequency:</span>
+                                    <span class="rent-value">Monthly</span>
+                                </div>
+                                <div class="rent-item">
+                                    <span class="rent-label">Next Payment Due:</span>
+                                    <span class="rent-value">November 29, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-info-circle"></i> ADDITIONAL INFORMATION</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="additional-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">Lease Start Date:</span>
+                                        <span class="info-value">January 15, 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Lease End Date:</span>
+                                        <span class="info-value">January 14, 2026</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Contract Duration:</span>
+                                        <span class="info-value">12 Months</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Utilities Included:</span>
+                                        <span class="info-value">Water, Basic Maintenance</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payments Section -->
+                <section id="payments" class="page-section">
+                    <!-- Payments Header -->
+                    <div class="profile-header">
+                        <h2><i class="bi bi-credit-card"></i> MY PAYMENTS</h2>
+                    </div>
+
+                    <!-- Payment Summary -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-bar-chart"></i> PAYMENT SUMMARY</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="payment-overview">
+                                <div class="payment-stats">
+                                    <div class="payment-stat">
+                                        <span class="stat-label">Total Paid</span>
+                                        <span class="stat-value paid">₱10,500</span>
+                                    </div>
+                                    <div class="payment-stat">
+                                        <span class="stat-label">Total Due</span>
+                                        <span class="stat-value due">₱3,500</span>
+                                    </div>
+                                    <div class="payment-stat">
+                                        <span class="stat-label">Next Due Date</span>
+                                        <span class="stat-value">Nov 29, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment History -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-clock-history"></i> PAYMENT HISTORY</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="search-filter">
+                                <div class="search-box">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" placeholder="Search payments..." class="search-input">
+                                </div>
+                                <div class="filter-dropdown">
+                                    <select class="filter-select">
+                                        <option value="all">All Payments</option>
+                                        <option value="paid">Paid</option>
+                                        <option value="unpaid">Unpaid</option>
+                                    </select>
+                                    <i class="bi bi-chevron-down"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-history-table">
+                                <div class="table-header">
+                                    <div class="table-cell">Date</div>
+                                    <div class="table-cell">Payment Type</div>
+                                    <div class="table-cell">Amount</div>
+                                    <div class="table-cell">Method</div>
+                                    <div class="table-cell">Period</div>
+                                    <div class="table-cell">Status</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Oct 1, 2025</div>
+                                    <div class="table-cell">Rent</div>
+                                    <div class="table-cell">₱3,500</div>
+                                    <div class="table-cell">InstaPay</div>
+                                    <div class="table-cell">October 2025</div>
+                                    <div class="table-cell"><span class="status-badge paid">Paid</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Sep 1, 2025</div>
+                                    <div class="table-cell">Rent</div>
+                                    <div class="table-cell">₱3,500</div>
+                                    <div class="table-cell">Bank Transfer</div>
+                                    <div class="table-cell">September 2025</div>
+                                    <div class="table-cell"><span class="status-badge paid">Paid</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Aug 1, 2025</div>
+                                    <div class="table-cell">Rent</div>
+                                    <div class="table-cell">₱3,500</div>
+                                    <div class="table-cell">Cash</div>
+                                    <div class="table-cell">August 2025</div>
+                                    <div class="table-cell"><span class="status-badge paid">Paid</span></div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Nov 29, 2025</div>
+                                    <div class="table-cell">Rent</div>
+                                    <div class="table-cell">₱3,500</div>
+                                    <div class="table-cell">-</div>
+                                    <div class="table-cell">November 2025</div>
+                                    <div class="table-cell"><span class="status-badge pending">Due</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Make Payment -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-credit-card"></i> MAKE PAYMENT ONLINE</h3>
+                        </div>
+                        <div class="section-content">
+                            <form class="payment-form">
+                                <div class="form-group">
+                                    <label for="paymentType">Payment Type</label>
+                                    <input type="text" id="paymentType" value="Rent (Fixed)" class="form-input" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="paymentPeriod">Payment Period</label>
+                                    <div class="select-wrapper">
+                                        <select id="paymentPeriod" class="form-input">
+                                            <option value="november">November 2025</option>
+                                            <option value="december">December 2025</option>
+                                        </select>
+                                        <i class="bi bi-chevron-down"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="paymentAmount">Amount</label>
+                                    <input type="text" id="paymentAmount" value="₱3,500" class="form-input" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="paymentMethod">Payment Method</label>
+                                    <div class="payment-methods">
+                                        <div class="payment-method active" data-method="instapay">
+                                            <i class="bi bi-phone"></i>
+                                            <span>InstaPay</span>
+                                        </div>
+                                    </div>
+                                    <small class="method-description">Digital Banks & E-Money Issuers</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="referenceNo">Reference Number</label>
+                                    <input type="text" id="referenceNo" placeholder="Enter reference number" class="form-input">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="paymentNotes">Notes</label>
+                                    <textarea id="paymentNotes" placeholder="Add any notes..." class="form-input textarea-input"></textarea>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn-secondary">Cancel</button>
+                                    <button type="button" class="btn-download">
+                                        <i class="bi bi-receipt"></i> Download Receipt
+                                    </button>
+                                    <button type="submit" class="btn-primary">
+                                        <i class="bi bi-credit-card"></i> Pay Now
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Payment Notifications -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-bell"></i> PAYMENT NOTIFICATIONS</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="notification-list">
+                                <div class="notification-item warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    <span>Rent for November due soon. Due date: Nov 29, 2025</span>
+                                </div>
+                                <div class="notification-item success">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Payment for October confirmed. Receipt #INV-2025-001</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Request Section -->
+                <section id="request" class="page-section">
+                    <!-- Request Header -->
+                    <div class="profile-header">
+                        <h2><i class="bi bi-file-text"></i> REQUEST / COMPLAINT</h2>
+                    </div>
+
+                    <!-- Request Form -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-pencil"></i> NEW REQUEST / COMPLAINT</h3>
+                        </div>
+                        <div class="section-content">
+                            <form class="request-form">
+                                <div class="form-group">
+                                    <label for="issueCategory">Issue Category</label>
+                                    <div class="select-wrapper">
+                                        <select id="issueCategory" class="form-input">
+                                            <option value="">Select Category</option>
+                                            <option value="maintenance">Maintenance</option>
+                                            <option value="complaint">Complaint</option>
+                                            <option value="lost-item">Lost Item</option>
+                                           
+                                        </select>
+                                        <i class="bi bi-chevron-down"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="issueDescription">Description</label>
+                                    <textarea id="issueDescription" placeholder="Please describe your issue in detail..." class="form-input textarea-input" rows="4"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="dateFiled">Date Filed</label>
+                                    <div class="date-input-wrapper">
+                                        <input type="date" id="dateFiled" class="form-input">
+                                        <i class="bi bi-calendar"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="urgencyLevel">Urgency Level</label>
+                                    <div class="urgency-levels">
+                                        <div class="urgency-level" data-level="low">
+                                            <i class="bi bi-info-circle"></i>
+                                            <span>Low</span>
+                                        </div>
+                                        <div class="urgency-level active" data-level="medium">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                            <span>Medium</span>
+                                        </div>
+                                        <div class="urgency-level" data-level="high">
+                                            <i class="bi bi-exclamation-triangle"></i>
+                                            <span>High</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn-clear">
+                                        <i class="bi bi-brush"></i> Clear Form
+                                    </button>
+                                    <button type="button" class="btn-secondary">Cancel</button>
+                                    <button type="submit" class="btn-primary">
+                                        <i class="bi bi-send"></i> Submit Request
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Submitted Requests -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-list"></i> SUBMITTED REQUESTS</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="requests-table">
+                                <div class="table-header">
+                                    <div class="table-cell">ID</div>
+                                    <div class="table-cell">Category</div>
+                                    <div class="table-cell">Date Filed</div>
+                                    <div class="table-cell">Status</div>
+                                    <div class="table-cell">Notes</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">#REQ-001</div>
+                                    <div class="table-cell">Complaint</div>
+                                    <div class="table-cell">Oct 20, 2025</div>
+                                    <div class="table-cell"><span class="status-badge pending">Pending</span></div>
+                                    <div class="table-cell">Aircon not working</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">#REQ-002</div>
+                                    <div class="table-cell">Lost Item</div>
+                                    <div class="table-cell">Oct 15, 2025</div>
+                                    <div class="table-cell"><span class="status-badge resolved">Resolved</span></div>
+                                    <div class="table-cell">Wallet found at reception</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">#REQ-003</div>
+                                    <div class="table-cell">Maintenance</div>
+                                    <div class="table-cell">Oct 10, 2025</div>
+                                    <div class="table-cell"><span class="status-badge in-progress">In Progress</span></div>
+                                    <div class="table-cell">Leaking faucet in bathroom</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Request Statistics -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <h3><i class="bi bi-pie-chart"></i> REQUEST STATISTICS</h3>
+                        </div>
+                        <div class="section-content">
+                            <div class="request-stats">
+                                <div class="request-stat">
+                                    <div class="stat-icon maintenance">
+                                        <i class="bi bi-tools"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3>Total Requests</h3>
+                                        <p class="stat-value">3</p>
+                                    </div>
+                                </div>
+                                <div class="request-stat">
+                                    <div class="stat-icon pending">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3>Pending</h3>
+                                        <p class="stat-value">1</p>
+                                    </div>
+                                </div>
+                                <div class="request-stat">
+                                    <div class="stat-icon resolved">
+                                        <i class="bi bi-check-circle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3>Resolved</h3>
+                                        <p class="stat-value">1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Update Password Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Update Password</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="password-form">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-input">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary close-modal">Cancel</button>
+                        <button type="submit" class="btn-primary">Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
