@@ -1,0 +1,224 @@
+﻿@{
+    ViewData["Title"] = "Tenant Registration";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Tenant Registration Section -->
+<div id="tenant-registration" class="section active">
+    <div class="card">
+        <div class="card-header">Tenant Registration</div>
+        <div class="card-body">
+            <form id="tenant-form" method="post" asp-controller="Admin" asp-action="AddTenant" class="tenant-registration-form">
+                <!-- Tenant Details Section -->
+                <div class="form-section">
+                    <h3>Tenant Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="FullName" class="form-control" placeholder="Enter full name" required>
+                            <div class="error-message" id="full-name-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="gender" value="male" required> Male
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" value="female" required> Female
+                                </label>
+                            </div>
+                            <div class="error-message" id="gender-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="Address" class="form-control" rows="2" placeholder="Enter address" required></textarea>
+                            <div class="error-message" id="address-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="Age" class="form-control" placeholder="Enter age" min="18" max="100" required>
+                            <div class="error-message" id="age-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-no">Contact No.</label>
+                            <input type="tel" id="contact-no" name="ContactNo" class="form-control" placeholder="Enter contact number" required>
+                            <div class="error-message" id="contact-no-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenant-status">Status</label>
+                            <select id="tenant-status" name="Status" class="form-control" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                            <div class="error-message" id="tenant-status-error"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rent Information Section -->
+                <div class="form-section">
+                    <h3>Rent Information</h3>
+                    <div class="form-grid">
+                        <!-- Assign Room moved to first position -->
+                        <div class="form-group room-assignment-section">
+                            <label for="room">Assign Room</label>
+                            <select id="room" name="RoomId" class="form-control" required>
+                                <option value="">Select a room</option>
+                                @if (Model.AvailableRooms != null)
+                                {
+                                    foreach (var room in Model.AvailableRooms)
+                                    {
+                                                <option value="@room.Id" data-rent="@room.RentPrice">@room.RoomNumber - @room.RoomType </option>
+                                    }
+                                }
+                            </select>
+                            <div class="error-message" id="room-error"></div>
+                        </div>
+
+                        <!-- Rent Price moved to second position -->
+                        <div class="form-group rent-price-section">
+                            <label for="tenant-rent-price">Rent Price</label>
+                            <input type="number"
+                                   id="tenant-rent-price"
+                                   name="RentPrice"
+                                   class="form-control"
+                                   placeholder="Auto fill"
+                                   min="0"
+                                   readonly
+                                   required>
+                            <div class="error-message" id="tenant-rent-price-error"></div>
+                        </div>
+
+                        <!-- Deposit remains in third position -->
+                        <div class="form-group deposit-section">
+                            <label for="amount-deposit">Amount Deposit</label>
+                            <input type="number"
+                                   id="amount-deposit"
+                                   name="Deposit"
+                                   class="form-control"
+                                   placeholder="Auto fill"
+                                   min="0"
+                                   readonly
+                                   required>
+                            <div class="error-message" id="amount-deposit-error"></div>
+                        </div>
+
+
+                        <!-- Move-in Date remains in fourth position -->
+                        <div class="form-group move-in-section">
+                            <label for="move-in-date">Move-in Date</label>
+                            <input type="date" id="move-in-date" name="MoveInDate" class="form-control" required>
+                            <div class="error-message" id="move-in-date-error"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Information Section -->
+                <div class="form-section">
+                    <h3>Account Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="Username" class="form-control" placeholder="Enter username" required>
+                            <div class="error-message" id="username-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="Password" class="form-control" placeholder="Enter password" required>
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-person-plus"></i> Add Tenant
+                    </button>
+                    <button type="button" class="btn btn-success" id="update-tenant-btn">
+                        <i class="bi bi-arrow-repeat"></i> Update
+                    </button>
+                    <button type="button" class="btn btn-warning" id="archive-tenant-btn">
+                        <i class="bi bi-archive"></i> Archive
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        <i class="bi bi-x"></i> Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search and Records Section -->
+    <div class="card mt-20">
+        <div class="card-header">Tenant Records</div>
+        <div class="card-body">
+            <!-- Search and Sort Controls -->
+            <div class="search-sort-controls">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="tenant-search-input" class="form-control search-input" placeholder="Search tenants by name, room number, or move-in date">
+                </div>
+                <div class="sort-control">
+                    <label for="tenant-sort-select">Sort by:</label>
+                    <select id="tenant-sort-select" class="form-control sort-select">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="room-asc">Room Number (Low-High)</option>
+                        <option value="room-desc">Room Number (High-Low)</option>
+                        <option value="date-desc">Move-in Date (Newest)</option>
+                        <option value="date-asc">Move-in Date (Oldest)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Tenant Records Table -->
+            <div class="table-responsive">
+                <table id="tenant-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Room</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Rent</th>
+                            <th>Deposit</th>
+                            <th>Status</th>
+                            <th>Move-in Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tenant-table-body">
+                        @if (Model.Tenants != null)
+                        {
+                            foreach (var tenant in Model.Tenants)
+                            {
+                                        <tr>
+                                            <td>@tenant.FullName</td>
+                                            <td>@tenant.RoomNumber</td>
+                                            <td>@tenant.Gender</td>
+                                            <td>@tenant.Age</td>
+                                            <td>₱@tenant.RentPrice</td>
+                                            <td>₱@tenant.Deposit</td>
+                                            <td><span class="status-badge status-@tenant.Status.ToLower()">@tenant.Status</span></td>
+                                            <td>@tenant.MoveInDate.ToString("MM/dd/yyyy")</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary edit-tenant" data-id="@tenant.Id">Edit</button>
+                                                <button class="btn btn-sm btn-danger delete-tenant" data-id="@tenant.Id">Delete</button>
+                                            </td>
+                                         </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Results Count -->
+            <div class="results-count">
+                Showing <span id="tenant-results-count">0</span> tenant records
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Dashboard Section -->
+<div id="dashboard" class="section active">
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: var(--secondary);">
+                <i class="bi bi-people"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="total-tenants">0</h3>
+                <p>Total Tenants</p>
+            </div>
+        </div>
+        <div class="stat-card"> 
+            <div class="stat-icon" style="background: var(--success);">
+                <i class="bi bi-door-closed"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="occupied-rooms">0</h3>
+                <p>Occupied Rooms</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: var(--warning);">
+                <i class="bi bi-clock"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="pending-requests">0</h3>
+                <p>Pending Requests</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: var(--danger);">
+                <i class="bi bi-calendar-x"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="overdue-payments">0</h3>
+                <p>Overdue Payments</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Recent Activities</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity</th>
+                            <th>User</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-activities-body">
+                        <!-- Recent activities will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Quick Actions</div>
+        <div class="card-body">
+            <div class="quick-actions-container">
+                <a asp-controller="Admin" asp-action="TenantRegistration" class="btn btn-primary quick-action-btn">
+                    <i class="bi bi-person-check"></i> Register New Tenant
+                </a>
+                <a asp-controller="Admin" asp-action="PaymentProcessing" class="btn btn-success quick-action-btn">
+                    <i class="bi bi-cash"></i> Process Payment
+                </a>
+                <a asp-controller="Admin" asp-action="RequestHandling" class="btn btn-warning quick-action-btn">
+                    <i class="bi bi-hand-index-thumb"></i> Handle Requests
+                </a>
+                <a asp-controller="Admin" asp-action="ReportsMonitoring" class="btn btn-primary quick-action-btn">
+                    <i class="bi bi-graph-up"></i> View Reports
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

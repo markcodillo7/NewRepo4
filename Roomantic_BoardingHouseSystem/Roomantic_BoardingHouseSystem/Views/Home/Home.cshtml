@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Welcome - Roomantic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Header with edge-to-edge positioning -->
+<header class="header">
+    <!-- Left edge: Roomantic logo -->
+    <a asp-controller="Home" asp-action="Home" class="logo-left" id="homeLink">
+        <i class="bi bi-building"></i>
+        Roomantic
+    </a>
+
+    <!-- Right edge: Login link -->
+    <a asp-controller="Home" asp-action="Login" class="login-right" id="loginLink">
+        <i class="bi bi-box-arrow-in-right"></i>
+        Login
+    </a>
+</header>
+
+<!-- Main content section -->
+<main class="main-content">
+    <!-- Welcome Section -->
+    <div class="content-section" id="welcomeSection">
+        <div class="welcome-container">
+            <div class="welcome-card">
+                <h1 class="welcome-title">Welcome To Roomantic</h1>
+                <p class="tagline">Finding A Right Room Is Like Finding A Right Person.</p>
+            </div>
+        </div>
+    </div>
+</main>

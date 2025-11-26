@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Request Handling";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-title mb-4">
+    <h2><i class="bi bi-tools"></i> Request Handling</h2>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+
+        <!-- 🔍 SEARCH AND FILTER -->
+        <div class="d-flex mb-4 justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+                <input type="text" id="searchRequest" class="form-control" placeholder="Search Tenant / Room">
+                <button class="btn btn-primary"><i class="bi bi-search"></i> Search</button>
+            </div>
+
+            <div>
+                <select id="filterCategory" class="form-select">
+                    <option value="">Filter</option>
+                    <option value="Complaint">Complaint</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Lost Item">Lost Item</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 📝 REQUEST FORM -->
+        <form id="requestForm" method="post" asp-controller="Request" asp-action="UpdateRequest">
+            <div class="row g-3">
+
+                <div class="col-md-3">
+                    <label class="form-label">Request ID</label>
+                    <input type="text" id="requestID" class="form-control" name="RequestId" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Tenant Name</label>
+                    <input type="text" id="tenantName" class="form-control" name="TenantName" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Room No.</label>
+                    <input type="text" id="roomNo" class="form-control" name="RoomNumber" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Category</label>
+                    <select id="category" class="form-select" name="Category">
+                        <option value="Complaint">Complaint</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Lost Item">Lost Item</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Date Filed</label>
+                    <input type="date" id="dateFiled" class="form-control" name="DateFiled">
+                </div>
+
+                <div class="col-md-9">
+                    <label class="form-label">Complaint</label>
+                    <input type="text" id="complaint" class="form-control" name="Complaint" placeholder="Enter details">
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Status</label>
+                    <select id="request-status" class="form-select" name="Status">
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 🔧 ACTION BUTTONS -->
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-repeat"></i> Update Status</button>            
+                <button type="button" class="btn btn-danger"><i class="bi bi-x-circle"></i> Close Request</button>
+            </div>
+        </form>
+
+        <hr class="my-4" />
+
+        <!-- 📢 ANNOUNCEMENTS + LOST & FOUND -->
+        <div class="row g-4">
+
+            <!-- ANNOUNCEMENTS -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4><i class="bi bi-megaphone-fill"></i> Announcements</h4>
+                        <input type="text" id="announcementText" class="form-control mb-3" placeholder="Enter announcement...">
+                        <button class="btn btn-primary w-100"><i class="bi bi-megaphone"></i> Announce</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOST & FOUND -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4><i class="bi bi-box-seam"></i> Lost & Found</h4>
+
+                        <textarea class="form-control mb-3" id="itemReports" rows="3" placeholder="Item Reports..."></textarea>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary w-100"><i class="bi bi-broadcast"></i> Broadcast All</button>
+                            <button class="btn btn-success w-100"><i class="bi bi-check2-circle"></i> Mark Found</button>
+                            <button class="btn btn-danger w-100"><i class="bi bi-x-circle"></i> Close Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4" />
+
+        <!-- 📋 REQUEST TABLE -->
+        <h4><i class="bi bi-table"></i> Request Table</h4>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Tenant</th>
+                        <th>Room</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="request-table-body">
+                    @if (Model.Requests != null)
+                    {
+                        foreach (var request in Model.Requests)
+                        {
+                                    <tr>
+                                        <td>@request.RequestId</td>
+                                        <td>@request.TenantName</td>
+                                        <td>@request.RoomNumber</td>
+                                        <td>@request.Category</td>
+                                        <td><span class="badge bg-info">@request.Status</span></td>
+                                        <td>@request.DateFiled.ToString("MM/dd/yyyy")</td>
+                                        <td>@request.Notes</td>
+                                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "My Payments";
+    ViewData["Active"] = "Payments";
+    Layout = "~/Views/Shared/_TenantLayout.cshtml";   // ✔ Added (same style as Admin)
+}
+
+<section>
+
+    <h2><i class="bi bi-credit-card"></i> My Payments</h2>
+
+    <div class="payment-summary">
+        <p><strong>Total Paid:</strong> ₱@Model.TotalPaid</p>
+        <p><strong>Total Due:</strong> ₱@Model.TotalDue</p>
+        <p><strong>Next Due:</strong> @Model.NextDueDate</p>
+    </div>
+
+    <hr />
+
+    <h3>Payment History</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Period</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var p in Model.PaymentHistory)
+            {
+                <tr>
+                    <td>@p.PaymentDate</td>
+                    <td>@p.PaymentType</td>
+                    <td>₱@p.Amount</td>
+                    <td>@p.Method</td>
+                    <td>@p.Period</td>
+                    <td>@p.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</section>

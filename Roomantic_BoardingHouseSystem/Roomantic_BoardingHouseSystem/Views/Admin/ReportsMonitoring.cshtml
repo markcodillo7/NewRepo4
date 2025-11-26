@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Reports & Monitoring";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Reports & Monitoring Section -->
+<div id="reports-monitoring" class="section active">
+
+    <!-- Header Card -->
+    <div class="content-card">
+        <div class="page-header d-flex justify-content-between align-items-center">
+            
+            <div class="d-flex align-items-center gap-2">
+                <a asp-controller="Admin" asp-action="Index" class="btn btn-outline">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <h2 class="page-title">Report & Monitoring</h2>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-outline"><i class="bi bi-file-earmark-arrow-down"></i> Export PDF</button>
+                <button class="btn btn-outline"><i class="bi bi-printer"></i> Print</button>
+                <button class="btn btn-outline"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Report Controls -->
+    <div class="content-card">
+        <div class="form-grid">
+            <div class="form-group span-2">
+                <label>Report Type</label>
+                <select id="reportType" class="form-select">
+                    <option value="monthly-income">Monthly Income</option>
+                    <option value="unpaid-tenants">Unpaid Tenants</option>
+                    <option value="room-status">Room Status</option>
+                    <option value="maintenance-requests">Maintenance Requests</option>
+                </select>
+            </div>
+        </div>
+
+        <button id="generateBtn" class="btn btn-primary mt-20">Generate Report</button>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="content-card">
+        <h3 class="section-title">Summary</h3>
+
+        <div class="stats-container">
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#4c6ef5;">
+                    <i class="bi bi-graph-up"></i>
+                </div>
+                <div>
+                    <h3>Monthly Income</h3>
+                    <p class="stat-value">₱@Model.MonthlyIncome</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#e8590c;">
+                    <i class="bi bi-person-x"></i>
+                </div>
+                <div>
+                    <h3>Unpaid Tenants</h3>
+                    <p class="stat-value">@Model.UnpaidTenantsCount</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#20c997;">
+                    <i class="bi bi-house"></i>
+                </div>
+                <div>
+                    <h3>Room Status</h3>
+                    <p class="stat-value">@Model.OccupiedRooms/@Model.TotalRooms Occupied</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#ff6b6b;">
+                    <i class="bi bi-tools"></i>
+                </div>
+                <div>
+                    <h3>Maintenance Requests</h3>
+                    <p class="stat-value">@Model.MaintenanceRequests</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Generated Report Table -->
+    <div class="content-card table-section">
+        <h3>Generated Report</h3>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Report Type</th>
+                        <th>Month</th>
+                        <th>Prepared By</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody id="generated-report-body">
+                    @if (Model.GeneratedReports != null)
+                    {
+                        foreach (var report in Model.GeneratedReports)
+                        {
+                            <tr>
+                                <td>@report.ReportType</td>
+                                <td>@report.Month</td>
+                                <td>@report.PreparedBy</td>
+                                <td>@report.GeneratedDate.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>

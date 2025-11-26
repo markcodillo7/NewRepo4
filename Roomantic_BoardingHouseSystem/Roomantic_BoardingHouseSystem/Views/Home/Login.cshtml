@@ -1,0 +1,69 @@
+﻿@model Roomantic_BoardingHouseSystem.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login - Roomantic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Header with edge-to-edge positioning -->
+<header class="header">
+    <!-- Left edge: Roomantic logo -->
+    <a asp-controller="Home" asp-action="Home" class="logo-left" id="homeLink">
+        <i class="bi bi-building"></i> <!-- Bootstrap Icon -->
+        Roomantic
+    </a>
+
+    <!-- Right edge: Login link -->
+    <a href="#" class="login-right active">
+        <i class="bi bi-box-arrow-in-right"></i> <!-- Bootstrap Icon -->
+        Login
+    </a>
+</header>
+
+<!-- Main content section -->
+<main class="main-content">
+    <!-- Login Section -->
+    <div class="content-section" id="loginSection">
+        <div class="login-container">
+            <div class="login-card">
+
+                <!-- Login Header -->
+                <div class="login-header">
+                    <h1>Login</h1>
+                    <div class="divider"></div>
+                </div>
+
+                <!-- Login Form -->
+                <!-- FIXED: should point to Home/Login POST -->
+                <form class="login-form" id="loginForm" asp-controller="Home" asp-action="Login" method="post">
+
+                    <!-- Username Field -->
+                    <div class="form-group">
+                        <label asp-for="Username">USERNAME</label>
+                        <input type="text" asp-for="Username" class="form-control" placeholder="Enter your username">
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group password-group">
+                        <label asp-for="Password">PASSWORD</label>
+                        <div class="password-input-container">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="Enter your password">
+                            <button type="button" class="password-toggle" id="passwordToggle">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <!-- Validation Summary -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <button type="submit" class="login-btn">Login</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>

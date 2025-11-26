@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Admin Module";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Admin Management Section -->
+<div id="admin-management" class="section active">
+    <div class="card">
+        <div class="card-header">Admin Account Management</div>
+        <div class="card-body">
+            <div class="form-section">
+                <h3>Change Username</h3>
+                <form id="username-form" method="post" asp-controller="Admin" asp-action="UpdateUsername">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="current-username">Current Username</label>
+							<input type="text" id="current-username" class="form-control" placeholder="Enter currnt username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-username">New Username</label>
+                            <input type="text" id="new-username" name="NewUsername" class="form-control" placeholder="Enter new username" required>
+                            <div class="error-message" id="new-username-error"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="update-username-btn">
+                        <i class="bi bi-person-gear"></i> Update Username
+                    </button>
+                </form>
+            </div>
+
+            <div class="form-section">
+                <h3>Change Password</h3>
+                <form id="password-form" method="post" asp-controller="Admin" asp-action="UpdatePassword">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" name="CurrentPassword" class="form-control" placeholder="Enter current password" required>
+                            <div class="error-message" id="current-password-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="NewPassword" class="form-control" placeholder="Enter new password" required>
+                            <div class="password-strength" id="password-strength">
+                                <div class="password-strength-bar"></div>
+                            </div>
+                            <div class="error-message" id="new-password-error"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="update-password-btn">
+                        <i class="bi bi-key"></i> Update Password
+                    </button>
+                </form>
+            </div>
+
+            <div class="form-section">
+                <h3>Admin Account Information</h3>
+                <form id="profile-form" method="post" asp-controller="Admin" asp-action="UpdateProfile">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="admin-fullname">Full Name</label>
+                            <input type="text" id="admin-fullname" name="FullName" class="form-control" value="@Model?.FullName" placeholder="Enter full name" required>
+                            <div class="error-message" id="admin-fullname-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-email">Email Address</label>
+                            <input type="email" id="admin-email" name="Email" class="form-control" value="@Model?.Email" placeholder="Enter email address" required>
+                            <div class="error-message" id="admin-email-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-phone">Phone Number</label>
+                            <input type="tel" id="admin-phone" name="Phone" class="form-control" value="@Model?.Phone" placeholder="Enter phone number" required>
+                            <div class="error-message" id="admin-phone-error"></div>
+                        </div>
+                   
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="update-profile-btn">
+                        <i class="bi bi-save"></i> Update Profile
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-20">
+        <div class="card-header">Login History</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="login-history-body">
+                        @if (Model?.LoginHistory != null)
+                        {
+                            foreach (var login in Model.LoginHistory)
+                            {
+                                <tr>
+                                    <td>@login.LoginDate.ToString("MM/dd/yyyy HH:mm")</td>                                
+                                    <td><span class="status-badge status-@login.Status?.ToLower()">@login.Status</span></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center">No login history available</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

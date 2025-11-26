@@ -1,0 +1,239 @@
+﻿@model Roomantic_BoardingHouseSystem.Models.RoomManagementViewModel
+
+@{
+    ViewData["Title"] = "Room Module";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Room Management Section -->
+<div id="room-management" class="section active">
+    <div class="card">
+        <div class="card-header">Room Information</div>
+        <div class="card-body">
+            <form id="room-form" method="post" asp-controller="Admin" asp-action="AddRoom">
+                @Html.AntiForgeryToken()
+
+                <!-- Hidden Id for Update / Archive -->
+                <input type="hidden" id="room-id" name="Id" />
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="room-number">Room Number</label>
+                        <input type="text" id="room-number" name="RoomNumber" class="form-control" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room-type">Room Type</label>
+                        <select id="room-type" name="RoomType" class="form-control" required>
+                            <option value="">Select room type</option>
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="Shared">Shared</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" id="capacity" name="Capacity" class="form-control" min="1" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rent-price">Rent Price (₱)</label>
+                        <input type="number" id="rent-price" name="RentPrice" class="form-control" min="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deposit">Monthly Deposit (₱)</label>
+                        <input type="number" id="deposit" name="Deposit" class="form-control" min="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room-status">Status</label>
+                        <select id="room-status" name="Status" class="form-control" required>
+                            <option value="Vacant">Vacant</option>
+                            <option value="Occupied">Occupied</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="current-occupants">Current Occupants</label>
+                        <input type="number" id="current-occupants" name="CurrentOccupants" class="form-control" min="0" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Notes</label>
+                    <textarea id="description" name="Description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <!-- Add Room -->
+                    <button type="submit"
+                            class="btn btn-primary"
+                            formaction="/Admin/AddRoom">
+                        <i class="bi bi-plus"></i> Add Room
+                    </button>
+
+                    <!-- Update Room -->
+                    <button type="submit"
+                            class="btn btn-success"
+                            formaction="/Admin/UpdateRoom">
+                        <i class="bi bi-arrow-repeat"></i> Update Room
+                    </button>
+
+                    <!-- Archive Room -->
+                    <button type="submit"
+                            class="btn btn-warning"
+                            formaction="/Admin/ArchiveRoom"
+                            onclick="return confirm('Archive this room?');">
+                        <i class="bi bi-archive"></i> Archive
+                    </button>
+
+                    <button type="reset" class="btn btn-danger">
+                        <i class="bi bi-x"></i> Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Error from Delete protection -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <!-- Room Records Section -->
+    <div class="card mt-20">
+        <div class="card-header">Room Records</div>
+        <div class="card-body">
+
+            <div class="search-filter-controls">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="room-search-input" class="form-control search-input" placeholder="Search rooms..." />
+                </div>
+
+                <div class="filter-control">
+                    <label>Sort by:</label>
+                    <select id="room-sort-select" class="form-control filter-select">
+                        <option value="room-asc">Room Number (Low-High)</option>
+                        <option value="room-desc">Room Number (High-Low)</option>
+                        <option value="rent-asc">Rent (Low-High)</option>
+                        <option value="rent-desc">Rent (High-Low)</option>
+                        <option value="type">Type</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
+
+                <div class="filter-control">
+                    <label>Filter by:</label>
+                    <select id="room-filter-select" class="form-control filter-select">
+                        <option value="all">All Rooms</option>
+                        <option value="vacant">Vacant</option>
+                        <option value="occupied">Occupied</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Room Table -->
+            <div class="table-responsive">
+                <table id="room-table">
+                    <thead>
+                        <tr>
+                            <th>Room #</th>
+                            <th>Type</th>
+                            <th>Capacity</th>
+                            <th>Rent (₱)</th>
+                            <th>Deposit (₱)</th>
+                            <th>Status</th>
+                            <th>Occupants</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="room-table-body">
+                        @if (Model?.Rooms != null)
+                        {
+                            foreach (var room in Model.Rooms)
+                            {
+                                <tr>
+                                    <td>@room.RoomNumber</td>
+                                    <td>@room.RoomType</td>
+                                    <td>@room.Capacity</td>
+                                    <td>₱@room.RentPrice</td>
+                                    <td>₱@room.Deposit</td>
+                                    <td><span class="status-badge status-@room.Status.ToLower()">@room.Status</span></td>
+                                    <td>@room.CurrentOccupants / @room.Capacity</td>
+                                    <td>
+                                        <!-- Edit button fills the form above -->
+                                        <button type="button"
+                                                class="btn btn-sm btn-primary edit-room"
+                                                data-id="@room.Id"
+                                                data-roomnumber="@room.RoomNumber"
+                                                data-roomtype="@room.RoomType"
+                                                data-capacity="@room.Capacity"
+                                                data-rentprice="@room.RentPrice"
+                                                data-deposit="@room.Deposit"
+                                                data-status="@room.Status"
+                                                data-currentoccupants="@room.CurrentOccupants"
+                                                data-description="@room.Description">
+                                            Edit
+                                        </button>
+
+                                        <!-- Delete form -->
+                                        <form asp-action="DeleteRoom"
+                                              asp-controller="Admin"
+                                              method="post"
+                                              style="display:inline-block;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@room.Id" />
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Delete this room?');">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="results-count">
+                Showing <span id="room-results-count">@((Model?.Rooms?.Count ?? 0))</span> room records
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Room Module Loaded with MongoDB");
+
+            // Handle "Edit" buttons: fill form from row data-* attributes
+            document.querySelectorAll('.edit-room').forEach(button => {
+                button.addEventListener('click', function () {
+                    document.getElementById('room-id').value              = this.dataset.id;
+                    document.getElementById('room-number').value         = this.dataset.roomnumber;
+                    document.getElementById('room-type').value           = this.dataset.roomtype;
+                    document.getElementById('capacity').value            = this.dataset.capacity;
+                    document.getElementById('rent-price').value          = this.dataset.rentprice;
+                    document.getElementById('deposit').value             = this.dataset.deposit;
+                    document.getElementById('room-status').value         = this.dataset.status;
+                    document.getElementById('current-occupants').value   = this.dataset.currentoccupants;
+                    document.getElementById('description').value         = this.dataset.description || "";
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+}

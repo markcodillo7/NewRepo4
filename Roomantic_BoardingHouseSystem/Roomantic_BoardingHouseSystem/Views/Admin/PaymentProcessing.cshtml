@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "Payment Processing";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Payment Processing Section -->
+<div id="payment-processing" class="section active">
+    <div class="card">
+        <div class="card-header">
+            <h2>Payment Processing</h2>
+            <div class="search-container">
+                <input type="text" id="searchTenant" placeholder="Search Tenant / Room">
+                <button type="button" class="btn btn-primary"><i class="bi bi-search"></i> Search</button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="filter-container">
+                <label for="filter">Filter:</label>
+                <select id="filter" class="form-control">
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                    <option value="pending">Pending</option>
+                </select>
+            </div>
+
+            <!-- Tenant Information -->
+            <form id="payment-form" method="post" asp-controller="Admin" asp-action="ProcessPayment">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tenant-id">Tenant ID</label>
+                        <input type="text" id="tenant-id" name="TenantId" class="form-control" placeholder="Select tenant">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tenant-name">Name</label>
+                        <input type="text" id="tenant-name" name="TenantName" class="form-control" placeholder="Tenant name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="room-no">Room No.</label>
+                        <input type="text" id="room-no" name="RoomNumber" class="form-control" placeholder="Room number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rent">Rent / Month</label>
+                        <input type="text" id="rent" name="Rent" class="form-control" placeholder="Rent amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outstanding">Outstanding</label>
+                        <input type="text" id="outstanding" name="Outstanding" class="form-control" placeholder="Outstanding amount">
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">Payment Details</h3>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="payment-type">Payment Type</label>
+                        <input type="text"
+                               id="payment-type"
+                               name="PaymentType"
+                               class="form-control"
+                               value="Rent"
+                               readonly>
+                    </div>
+              
+                    <div class="form-group">
+                        <label for="payment-period">Payment Period</label>
+                        <select id="payment-period" name="PaymentPeriod" class="form-control">
+                            <!-- Payment periods will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount-paid">Amount Paid</label>
+                        <input type="number" id="amount-paid" name="AmountPaid" class="form-control" placeholder="Enter amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment-method">Payment Method</label>
+                        <input type="text"
+                               id="payment-method"
+                               name="PaymentMethod"
+                               class="form-control"
+                               value="InstaPay (Digital Banks & E-Money Issuers)"
+                               readonly>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="reference-no">Reference No.</label>
+                        <input type="text" id="reference-no" name="ReferenceNo" class="form-control" placeholder="Enter reference number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment-date">Payment Date</label>
+                        <div class="date-input">
+                            <i class="bi bi-calendar"></i>
+                            <input type="date" id="payment-date" name="PaymentDate" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save Payment</button>
+                    <button type="button" class="btn btn-success"><i class="bi bi-check"></i> Approve</button>
+                    <button type="button" class="btn btn-secondary"><i class="bi bi-x"></i> Reject</button>
+                    <button type="button" class="btn btn-danger"><i class="bi bi-printer"></i> Print Receipt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Records Section -->
+    <div class="payment-records">
+        <h3>Payment Records</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tenant</th>
+                    <th>Room No.</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="payment-records-body">
+                @if (Model.PaymentRecords != null)
+                {
+                    foreach (var payment in Model.PaymentRecords)
+                    {
+                                <tr>
+                                    <td>@payment.TenantName</td>
+                                    <td>@payment.RoomNumber</td>
+                                    <td>₱@payment.Amount</td>
+                                    <td>@payment.PaymentMethod</td>
+                                    <td>@payment.PaymentDate.ToString("MM/dd/yyyy")</td>
+                                    <td><span class="status-badge status-@payment.Status.ToLower()">@payment.Status</span></td>
+                                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

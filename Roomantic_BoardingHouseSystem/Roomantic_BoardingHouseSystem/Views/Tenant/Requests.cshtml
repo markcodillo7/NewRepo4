@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Requests & Complaints";
+    ViewData["Active"] = "Requests";
+    Layout = "~/Views/Shared/_TenantLayout.cshtml";   // ✔ Added (same style as Admin)
+}
+
+<section>
+
+    <h2><i class="bi bi-file-text"></i> Submit a Request</h2>
+
+    <form asp-action="SubmitRequest" method="post">
+
+        <label>Category</label>
+        <select name="Category" class="form-input">
+            <option>Maintenance</option>
+            <option>Complaint</option>
+            <option>Lost Item</option>
+        </select>
+
+        <label>Description</label>
+        <textarea name="Description" class="form-input"></textarea>
+
+        <label>Urgency</label>
+        <select name="Urgency" class="form-input">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+
+        <button class="btn-primary">Submit</button>
+
+    </form>
+
+    <hr />
+
+    <h3>Your Requests</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var req in Model.MyRequests)
+            {
+                <tr>
+                    <td>@req.RequestId</td>
+                    <td>@req.Category</td>
+                    <td>@req.DateFiled</td>
+                    <td>@req.Status</td>
+                    <td>@req.Notes</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</section>

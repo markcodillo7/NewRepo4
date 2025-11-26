@@ -1,0 +1,124 @@
+﻿        @{
+            Layout = null;
+        }
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>@ViewData["Title"] - Tenant Portal</title>
+
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+            <!-- Bootstrap Icons -->
+            <link rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+            <!-- Tenant CSS -->
+            <link rel="stylesheet" href="~/css/tenant.css" asp-append-version="true" />
+
+            <!-- Poppins Font -->
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        </head>
+
+        <body>
+            <div class="dashboard-container">
+
+                <!-- SIDEBAR -->
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <h2><i class="bi bi-house-door"></i> Tenant Portal</h2>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <ul>
+                            <li class="nav-item @(ViewData["Active"]?.ToString() == "Dashboard" ? "active" : "")">
+                                <a asp-controller="Tenant" asp-action="Dashboard">
+                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                </a>
+                            </li>
+
+                            <li class="nav-item @(ViewData["Active"]?.ToString() == "Profile" ? "active" : "")">
+                                <a asp-controller="Tenant" asp-action="Profile">
+                                    <i class="bi bi-person"></i> My Profile
+                                </a>
+                            </li>
+
+                            <li class="nav-item @(ViewData["Active"]?.ToString() == "Payments" ? "active" : "")">
+                                <a asp-controller="Tenant" asp-action="MyPayments">
+                                    <i class="bi bi-credit-card"></i> My Payments
+                                </a>
+                            </li>
+
+                            <li class="nav-item @(ViewData["Active"]?.ToString() == "Requests" ? "active" : "")">
+                                <a asp-controller="Tenant" asp-action="MyRequests">
+                                    <i class="bi bi-file-text"></i> Requests / Complaints
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="sidebar-footer">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="user-details">
+                                <p class="user-name">@User.Identity?.Name</p>
+                                <p class="user-role">Tenant</p>
+                            </div>
+                        </div>
+
+                        <form asp-controller="Auth" asp-action="Logout" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="logout-btn">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
+                    </div>
+                </aside>
+
+                <!-- MAIN CONTENT -->
+                <main class="main-content">
+                    <header class="header">
+                        <div class="header-left">
+                            <button class="menu-toggle" id="menuToggle">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <h1>@ViewData["Title"]</h1>
+                        </div>
+
+                        <div class="header-right">
+                            <div class="notification-icon">
+                                <i class="bi bi-bell"></i>
+                                <span class="notification-badge">
+                                    @((ViewBag.NotificationCount ?? 0).ToString())
+                                </span>
+                            </div>
+
+                            <div class="header-user">
+                                <span>@User.Identity?.Name</span>
+                                <div class="user-avatar-small">
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="content-area">
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Tenant Custom Script -->
+            <script src="~/js/tenant.js" asp-append-version="true"></script>
+
+        </body>
+        </html>

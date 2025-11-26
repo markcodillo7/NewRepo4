@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Tenant Dashboard";
+    ViewData["Active"] = "Dashboard";
+    Layout = "~/Views/Shared/_TenantLayout.cshtml";   // ✔ Added (same style as Admin)
+}
+
+<section>
+    <div class="welcome-section">
+        <h2>Hello, @Model.FullName 👋</h2>
+
+        <div class="tenant-info-card">
+            <p><i class="bi bi-door-closed"></i> Room: @Model.AssignedRoom</p>
+            <p><i class="bi bi-currency-dollar"></i> Rent: ₱@Model.RentPrice</p>
+            <p>
+                <i class="bi bi-check-circle"></i> Status:
+                <span class="status-active">@Model.Status</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+        <div class="stat-card">
+            <h3>Rent Due</h3>
+            <p>₱@Model.NextDueAmount</p>
+            <p>Due: @Model.NextDueDate</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Paid</h3>
+            <p>₱@Model.TotalPaid</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Reports</h3>
+            <p>@Model.PendingReports Pending</p>
+        </div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="dashboard-section">
+        <h3><i class="bi bi-megaphone"></i> Announcements</h3>
+        <ul>
+            @foreach (var a in Model.Announcements)
+            {
+                <li><i class="bi bi-info-circle"></i> @a.Message</li>
+            }
+        </ul>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="dashboard-section">
+        <h3>Recent Activity</h3>
+        <ul>
+            @foreach (var activity in Model.RecentActivities)
+            {
+                <li>@activity.Description — @activity.Date</li>
+            }
+        </ul>
+    </div>
+
+</section>
